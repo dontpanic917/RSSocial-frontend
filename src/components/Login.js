@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import { login } from '../actions/userActions';
+import { login } from '../actions/loginActions';
 import {withRouter} from 'react-router-dom'
 class Login extends Component {
 

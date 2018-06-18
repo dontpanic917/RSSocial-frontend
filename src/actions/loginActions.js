@@ -3,9 +3,11 @@ import { LOGIN } from './types';
 export const login = (username, password, history) => dispatch => {
   fetch('http://localhost:4000/login', {
     method: 'POST',
-    body: JSON.stringify({username, password}),
+    body:
+      JSON.stringify({username, password})
+    ,
     headers: {
-      'Content-Type': "application/json",
+      'Content-Type': 'application/json',
       'accepts': 'application/json',
     }
   })
@@ -15,13 +17,13 @@ export const login = (username, password, history) => dispatch => {
       localStorage.setItem('token', userHash.token)
       localStorage.setItem('user_id', userHash.user_id)
       localStorage.setItem('username', userHash.username)
-      dispatch({type: LOGIN, payload: userHash})
-      history.push('/')
+      dispatch({type: LOGIN, payload: {success: "connected"}})
+      history.push('/feeds')
     } else {
-    dispatch({
-      type: LOGIN,
-      payload: {errors: "Mistake"}
-    })
+      dispatch({
+        type: LOGIN,
+        payload: {errors: "Mistake"}
+      })
     }
   })
 }

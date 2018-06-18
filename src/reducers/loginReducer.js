@@ -1,16 +1,12 @@
 import { LOGIN } from '../actions/types';
 
-const initialState = {
-  user: {}
-};
-
-export default function(state = initialState, action) {
+export default function(state = {}, action) {
   console.log(action)
   switch (action.type) {
     case LOGIN:
       return {
         ...state,
-        user: action.payload
+        ...action.payload
       };
     default:
       return state;

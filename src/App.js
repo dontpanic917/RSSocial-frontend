@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import {Menu, Input} from 'semantic-ui-react'
 import Home from './Containers/Home';
+import FeedUI from './Containers/FeedUI';
 
 
 
@@ -23,22 +24,11 @@ class App extends Component {
             <Menu.Item onClick={this.handleItemClick}>
               {
                 this.loggedIn()
-                ? <NavLink to="/feeds"><h1>DISCOURSER</h1></NavLink>
-                : <NavLink to="/"><h1>DISCOURSER</h1></NavLink>
+                ? <NavLink to="/feeds"><h1>SIMPLICATE</h1></NavLink>
+                : <NavLink to="/"><h1>SIMPLICATE</h1></NavLink>
               }
             </Menu.Item>
             <Menu.Menu position='right'>
-
-              {/* {
-                this.loggedIn() ?
-                <Input
-                  className='search'
-                  placeholder='Search...'
-                  value={this.state.query}
-                  onChange={this.searchChange}
-                />
-                : null
-              } */}
               {
                 this.loggedIn() ?
                 <Menu.Item
@@ -54,13 +44,13 @@ class App extends Component {
             {
               this.loggedIn()
               ? <Route path='/feeds' render={(props) => (
-                  <Home refresh={this.refresh} />
+                  <FeedUI />
                 )}/>
               : <Route path="/" exact render={(props) => (
-                  <Home refresh={this.refresh} />
+                  <Home />
                 )}/>
             }
-            {this.loggedIn() ? null : <Redirect to="/"></Redirect>}
+            {this.loggedIn() ? <Redirect to="/feeds"></Redirect> : <Redirect to="/"></Redirect>}
           </Switch>
       </div>
     );

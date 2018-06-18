@@ -21,11 +21,10 @@ export default class Home extends Component {
     return(
       <div>
         <div className='welcome'>
-          <h1>Welcome to Flote</h1>
 
           <p>
-            Lightweight and Accessible Anywhere <br/>
-            A Note Taking App Designed With You in Mind
+            Lightweight RSS Feeds <br/>
+
           </p>
         </div>
         <div className='login'>

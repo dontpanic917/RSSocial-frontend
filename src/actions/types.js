@@ -1,3 +1,5 @@
-export const FETCH_POSTS = 'FETCH_POSTS';
-export const NEW_POST = 'NEW_POST';
+export const FETCH_BOOKMARKS = 'FETCH_BOOKMARKS';
+export const NEW_BOOKMARK = 'NEW_BOOKMARK';
+export const FETCH_SUBSCRIPTIONS = 'FETCH_SUBSCRIPTIONS';
+export const NEW_SUBSCRIPTION = 'NEW_SUBSCRIPTION';
 export const LOGIN = 'LOGIN';
