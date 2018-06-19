@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Menu} from 'semantic-ui-react'
-import Login from '../components/Login'
+import Login from '../Components/Login'
 import RegistrationForm from '../Components/RegistrationForm'
 
 

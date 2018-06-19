@@ -14,6 +14,12 @@ export const login = (username, password, history) => dispatch => {
   .then(res => res.json())
   .then(userHash => {
     if(userHash.token){
+      const credentials = {
+        success: true,
+        token: userHash.token,
+        user_id: userHash.user_id,
+        username: userHash.username
+      }
       localStorage.setItem('token', userHash.token)
       localStorage.setItem('user_id', userHash.user_id)
       localStorage.setItem('username', userHash.username)

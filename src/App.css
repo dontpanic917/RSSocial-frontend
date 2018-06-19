@@ -21,7 +21,30 @@
 .App-intro {
   font-size: large;
 }
-
+p > div {
+  text-align: center;
+  margin: auto;
+}
+a {
+  text-align: center;
+}
+img {
+  max-width: 700px;
+  max-height: 700px;
+  margin: auto;
+}
+blockquote {
+  text-align: center;
+}
+.aligncenter {
+  text-align: center;
+}
+.img-wrap {
+  text-align: center;
+}
+img ~ p {
+  text-align: center;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

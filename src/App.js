@@ -6,8 +6,6 @@ import {Menu, Input} from 'semantic-ui-react'
 import Home from './Containers/Home';
 import FeedUI from './Containers/FeedUI';
 
-
-
 class App extends Component {
   loggedIn = () => {
     return localStorage.getItem('token') !== null
@@ -24,8 +22,8 @@ class App extends Component {
             <Menu.Item onClick={this.handleItemClick}>
               {
                 this.loggedIn()
-                ? <NavLink to="/feeds"><h1>SIMPLICATE</h1></NavLink>
-                : <NavLink to="/"><h1>SIMPLICATE</h1></NavLink>
+                ? <NavLink to="/feeds"><h1>SIMPLE SYNDICATE</h1></NavLink>
+                : <NavLink to="/"><h1>SIMPLE SYNDICATE</h1></NavLink>
               }
             </Menu.Item>
             <Menu.Menu position='right'>
@@ -50,7 +48,11 @@ class App extends Component {
                   <Home />
                 )}/>
             }
-            {this.loggedIn() ? <Redirect to="/feeds"></Redirect> : <Redirect to="/"></Redirect>}
+            {
+              this.loggedIn()
+              ? <Redirect to="/feeds"></Redirect>
+              : <Redirect to="/"></Redirect>
+            }
           </Switch>
       </div>
     );

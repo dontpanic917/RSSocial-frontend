@@ -5,8 +5,8 @@ export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_SUBSCRIPTIONS:
       return {
-        ...state,
-        ...action.subscriptions
+        ...action.subscriptions,
+        ...state
       };
     case POPULATE_SUBSCRIPTION:
       console.log(state)
@@ -19,11 +19,11 @@ export default function(state = {}, action) {
         }, {});
       return {
         ...state,
-        [action.name]: {
-          ...state[action.name],
+        [action.subscriptionID]: {
+          ...state[action.subscriptionID],
           ...action.feed,
           items: {
-            ...state[action.name].items,
+            ...state[action.subscriptionID].items,
             ...itemMap
           }
         }

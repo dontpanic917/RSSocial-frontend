@@ -11,23 +11,38 @@ export const fetchSubscriptions = () => (dispatch) => {
       'Authorization': token,
       'Content-Type': 'application/json'}
     })
-    .then(res => res.json()).then( (subscriptions) =>
+    .then(res => res.json()).then( (subscriptions) => {
       dispatch({
         type: FETCH_SUBSCRIPTIONS,
         subscriptions
       })
-    );
+    });
 };
 
-export const populateSubscriptions = (e, { name }) => (dispatch, getState) => {
-  const subscription = getState().subscriptions[name]
+export const populateSubscriptions = (subscriptionID) => (dispatch, getState) => {
+  const subscription = getState().subscriptions[subscriptionID]
   const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
   parser.parseURL(CORS_PROXY + subscription.feedUrl)
-  .then(feed =>
+  .then(feed => {
+    feed.items = feed.items.filter((item) => (item.content.length > 0 && item.title.length > 0 && !getState().subscriptions[subscriptionID].items.hasOwnProperty(item.guid)));
+    feed.items = feed.items.map((item) => {
+      if (item['content:encoded']){
+        item.encodedContent = item['content:encoded'];
+        delete item['content:encoded']
+
+      }
+      item.read = false
+      return item
+    })
+    console.log(feed.items)
     dispatch({
       type: POPULATE_SUBSCRIPTION,
-      name,
+      subscriptionID,
       feed
     })
-  )
+  })
+}
+
+export const addSubscription = (e) => (dispatch) => {
+
 }
