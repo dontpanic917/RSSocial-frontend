@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ArticleList from '../components/ArticleList'
+import ArticleList from '../Components/ArticleList'
 
 
 const mapStateToProps = (state) => ({

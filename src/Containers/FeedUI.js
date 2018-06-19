@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react'
 import { fetchSubscriptions } from '../actions/subscriptionActions';
-import NavMenu from '../components/NavMenu'
+import NavMenu from '../Components/NavMenu'
 import ArticlesContainer from './ArticlesContainer'
 
 

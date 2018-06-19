@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Menu} from 'semantic-ui-react'
 import Login from '../components/Login'
-import RegistrationForm from '../components/RegistrationForm'
+import RegistrationForm from '../Components/RegistrationForm'
 
 
 export default class Home extends Component {

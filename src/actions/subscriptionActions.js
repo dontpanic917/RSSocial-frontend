@@ -1,4 +1,4 @@
-import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION } from './types';
+import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from './types';
 import Parser from 'rss-parser'
 let parser = new Parser()
 console.log(Parser, parser)
@@ -25,7 +25,7 @@ export const populateSubscriptions = (e, { name }) => (dispatch, getState) => {
   parser.parseURL(CORS_PROXY + subscription.feedUrl)
   .then(feed =>
     dispatch({
-      type: 'POPULATE_SUBSCRIPTION',
+      type: POPULATE_SUBSCRIPTION,
       name,
       feed
     })

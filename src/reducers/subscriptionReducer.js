@@ -1,4 +1,4 @@
-import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION } from '../actions/types';
+import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from '../actions/types';
 
 export default function(state = {}, action) {
 
@@ -8,12 +8,12 @@ export default function(state = {}, action) {
         ...state,
         ...action.subscriptions
       };
-    case 'POPULATE_SUBSCRIPTION':
+    case POPULATE_SUBSCRIPTION:
       console.log(state)
       const itemMap = action.feed.items.map(
         (item) => ({[item.guid]: item})
       ).reduce(function(result, item) {
-          var key = Object.keys(item)[0]; //first property: a, b, c
+          var key = Object.keys(item)[0];
           result[key] = item[key];
           return result;
         }, {});
