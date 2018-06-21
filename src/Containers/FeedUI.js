@@ -5,7 +5,7 @@ import { fetchSubscriptions } from '../actions/subscriptionActions';
 import NavMenu from '../Components/NavMenu'
 import ArticlesContainer from './ArticlesContainer'
 import ReadModal from '../Components/ReadModal'
-
+import DefaultHome from '../Components/DefaultHome'
 
 class FeedUI extends Component {
 
@@ -21,9 +21,9 @@ class FeedUI extends Component {
           <Grid.Column width={3} floated='left'><NavMenu /></Grid.Column>
           <Grid.Column width={11} textAlign={'left'}>
           {
-            this.props.activeSubscription
+            activeSubscription
             ? <ArticlesContainer />
-            : null
+            : <DefaultHome />
           }
           <ReadModal />
           </Grid.Column>

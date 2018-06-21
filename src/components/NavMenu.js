@@ -1,50 +1,82 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchSubscriptions, populateSubscriptions } from '../actions/subscriptionActions';
-import { setMenuFocus, setSubscriptionFocus } from '../actions/navActions';
-import { Container, Dropdown, Icon, Input, Menu } from 'semantic-ui-react'
+import { addSubscription, fetchSubscriptions, populateSubscriptions } from '../actions/subscriptionActions';
+import { onFormChange, setMenuFocus, setSubscriptionFocus } from '../actions/navActions';
+import { Container, Dropdown, Icon, Input, Menu, Form, Checkbox, Button } from 'semantic-ui-react'
 
 class NavMenu extends Component {
 
   render() {
-    const { activeItem, setMenuFocus, subscriptions, fetchSubscriptions, setSubscriptionFocus } = this.props
-    const subRender = Object.keys(subscriptions).map( key => <ul style={{textAlign: 'justify'}}key={key} onClick={() => setSubscriptionFocus(key)}>{key}</ul>)
+    const { addSubscription, addSubscriptionUrl, addSubscriptionFeedName, activeItem, setMenuFocus, subscriptions, fetchSubscriptions, setSubscriptionFocus, onFormChange } = this.props
+    const subRender = Object.keys(subscriptions).map( key => <Menu.Item style={{textAlign: 'justify'}} key={key} onClick={() => setSubscriptionFocus(key)}>{key}</Menu.Item>)
+    const trigger = (
+      <span>
+        <i
+          className="right floated window add icon"
+          onClick={(e)=>{e.preventDefault();e.stopPropagation()}}
+        />
+      </span>
+    )
     return (
-      <Menu vertical>
-        <Menu.Item >
+      <Menu vertical size='large' floated>
+        {/* <Menu.Item style={{textAlign: 'justify'}}>
           <Input placeholder='Search...' />
-        </Menu.Item>
-
-        <Menu.Item name='feeds' active={activeItem === 'feeds'} onClick={() => setMenuFocus('feeds')}>
+        </Menu.Item> */}
+        <Menu.Item name='feeds' active={activeItem === 'feeds'} style={{textAlign: 'justify'}} onClick={() => setMenuFocus('feeds')}>
           Feeds
-          <i
-            className="right floated window add icon"
-            onClick={(e)=>{e.preventDefault();e.stopPropagation();console.log('ddeburger',e)}}
-          />
+          <Dropdown icon='add' className='addFeed'>
+            <Dropdown.Menu>
+              <Dropdown.Header content='Add an RSS subscription' />
+              <Form style={{margin:'10px'}}>
+                <Form.Field>
+                  <label>URL</label>
+                  <input name='addSubscriptionUrl' placeholder='URL' value={addSubscriptionUrl} onClick={(e)=>{e.stopPropagation()}} onChange={(e)=>{onFormChange(e)}} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Feed Name</label>
+                  <input name='addSubscriptionFeedName' placeholder='Feed Name' value={addSubscriptionFeedName} onClick={(e)=>{e.stopPropagation()}} onChange={(e)=>{onFormChange(e)}} />
+                </Form.Field>
+                <Button type='submit' onClick={(e)=>{addSubscription(addSubscriptionFeedName,addSubscriptionUrl)}}>Add Subscription</Button>
+              </Form>
+            </Dropdown.Menu>
+          </Dropdown>
         </Menu.Item>
-        {activeItem === 'feeds' ? <Menu.Item> {subRender} </Menu.Item> : null}
+        {activeItem === 'feeds' ? <Menu.Menu> {subRender} </Menu.Menu> : null}
 
-        <Menu.Item name='bookmarks' active={activeItem === 'bookmarks'} onClick={() => setMenuFocus('bookmarks')}>
+        {/* <Menu.Item name='bookmarks' active={activeItem === 'bookmarks'} style={{textAlign: 'justify'}} onClick={() => setMenuFocus('bookmarks')}>
           Bookmarks
         </Menu.Item>
-        {activeItem === 'bookmarks' ? <Menu.Item>Tags<Menu.Menu></Menu.Menu><Menu.Menu>Public</Menu.Menu> </Menu.Item> : null}
-        <Menu.Item name='shares' active={activeItem === 'shares'} onClick={() => setMenuFocus('shares')}>
-          Shares
-        </Menu.Item>
+        {activeItem === 'bookmarks' ? <Menu.Item>Tags<Menu.Menu></Menu.Menu><Menu.Menu>Public</Menu.Menu> </Menu.Item> : null} */}
+        {/* <Menu.Item name='friends' active={activeItem === 'friends'} style={{textAlign: 'justify'}} onClick={() => setMenuFocus('friends')}>
+          Friends
+          <Dropdown icon='add' className='addFeed'>
+            <Dropdown.Menu>
+              <Dropdown.Header content='Add an RSS subscription' />
+              <Form style={{margin:'10px'}}>
+                <Form.Field>
+                  <label>URL</label>
+                  <input name='addSubscriptionUrl' placeholder='URL' value={addSubscriptionUrl} onClick={(e)=>{e.stopPropagation()}} onChange={(e)=>{onFormChange(e)}} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Feed Name</label>
+                  <input name='addSubscriptionFeedName' placeholder='Feed Name' value={addSubscriptionFeedName} onClick={(e)=>{e.stopPropagation()}} onChange={(e)=>{onFormChange(e)}} />
+                </Form.Field>
+                <Button type='submit' onClick={(e)=>{addSubscription(addSubscriptionFeedName,addSubscriptionUrl)}}>Add Subscription</Button>
+              </Form>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Item> */}
 
-        <Dropdown item text='More'>
-          <Dropdown.Menu>
-            <Dropdown.Item icon='edit' text='Edit Profile' />
-            <Dropdown.Item icon='settings' text='Account Settings' />
-          </Dropdown.Menu>
-        </Dropdown>
+
       </Menu>
     )
   }
 }
 const mapStateToProps = (state, ownProps) => ({
   subscriptions: state.subscriptions,
-  activeItem: state.nav.activeItem
+  activeItem: state.nav.activeItem,
+  addSubscriptionUrl: state.nav.addSubscriptionUrl,
+  addSubscriptionFeedName: state.nav.addSubscriptionFeedName
 });
 
-export default connect(mapStateToProps, {populateSubscriptions, setMenuFocus, setSubscriptionFocus})(NavMenu);
+export default connect(mapStateToProps, {addSubscription, onFormChange, populateSubscriptions, setMenuFocus, setSubscriptionFocus})(NavMenu);

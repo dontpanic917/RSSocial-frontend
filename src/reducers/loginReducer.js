@@ -1,5 +1,10 @@
 import { LOGIN } from '../actions/types';
 
+const initialState = {
+  user_id: false,
+  username: false,
+  token: false
+}
 export default function(state = {}, action) {
   console.log(action)
   switch (action.type) {

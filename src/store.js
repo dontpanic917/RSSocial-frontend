@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import rootReducer from './reducers/index';
 import { loadState, saveState } from './localStorage';
 import throttle from 'lodash/throttle'
 
@@ -16,7 +16,11 @@ const store = createStore(
 );
 store.subscribe(throttle(() => {
   saveState({
-    subscriptions: store.getState().subscriptions
+    subscriptions: {
+      NYT: store.getState().subscriptions['NYT'],
+      'the intercept': store.getState().subscriptions['the intercept'],
+      'Brooklyn Vegan': store.getState().subscriptions['Brooklyn Vegan']
+    }
   });
-}, 5000))
+}, 1000))
 export default store;

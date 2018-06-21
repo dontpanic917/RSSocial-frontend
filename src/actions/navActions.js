@@ -1,4 +1,4 @@
-import { ARTICLE_FOCUS, MODAL_TOGGLE, SET_ACTIVE_ITEM, SET_SUBSCRIPTION_FOCUS } from './types';
+import { ON_FORM_CHANGE, ARTICLE_FOCUS, MODAL_TOGGLE, SET_ACTIVE_ITEM, SET_SUBSCRIPTION_FOCUS } from './types';
 import { populateSubscriptions } from '../actions/subscriptionActions';
 
 export const setMenuFocus = (menuItem) => (dispatch , getState) => {
@@ -30,4 +30,8 @@ export const articleFocus = (article) => (dispatch) => {
 
 export const modalToggle = (status) => (dispatch) => {
   dispatch({type: MODAL_TOGGLE, modalStatus: status })
+}
+//add subscription Form
+export const onFormChange = (event) => (dispatch) => {
+  dispatch({type: ON_FORM_CHANGE, payload: {[event.target.name]: event.target.value}})
 }

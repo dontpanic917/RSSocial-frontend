@@ -1,4 +1,4 @@
-import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from '../actions/types';
+import { CLEAR_STATE, ADD_SUBSCRIPTION, FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from '../actions/types';
 
 export default function(state = {}, action) {
 
@@ -28,12 +28,16 @@ export default function(state = {}, action) {
           }
         }
       }
-    case NEW_SUBSCRIPTION:
+    case ADD_SUBSCRIPTION:
       console.log(state)
       return {
         ...state,
-        newSubscription: action.payload
+        ...action.subscription
       };
+      // case CLEAR_STATE:
+      //   return {
+      //     ...action.payload
+      //   }
     default:
       return state;
   }

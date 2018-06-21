@@ -23,7 +23,7 @@ export const login = (username, password, history) => dispatch => {
       localStorage.setItem('token', userHash.token)
       localStorage.setItem('user_id', userHash.user_id)
       localStorage.setItem('username', userHash.username)
-      dispatch({type: LOGIN, payload: {success: "connected"}})
+      dispatch({type: LOGIN, payload: {...credentials}})
       history.push('/feeds')
     } else {
       dispatch({
@@ -31,5 +31,10 @@ export const login = (username, password, history) => dispatch => {
         payload: {errors: "Mistake"}
       })
     }
+  })
+}
+export const logout = () => dispatch => {
+  dispatch({
+    type: 'USER_LOGOUT'
   })
 }

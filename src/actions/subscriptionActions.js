@@ -1,10 +1,9 @@
-import { FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from './types';
+import { CLEAR_STATE, ADD_SUBSCRIPTION, FETCH_SUBSCRIPTIONS, NEW_SUBSCRIPTION, POPULATE_SUBSCRIPTION } from './types';
 import Parser from 'rss-parser'
 let parser = new Parser()
-console.log(Parser, parser)
+// console.log(Parser, parser)
 
-export const fetchSubscriptions = () => (dispatch) => {
-  let user_id = localStorage.getItem('user_id')
+export const fetchSubscriptions = () => (dispatch, getState) => {
   let token = localStorage.getItem('token')
   fetch('http://localhost:4000/subscriptions', {
     headers: {
@@ -43,6 +42,23 @@ export const populateSubscriptions = (subscriptionID) => (dispatch, getState) =>
   })
 }
 
-export const addSubscription = (e) => (dispatch) => {
-
-}
+export const addSubscription = (name, feedUrl) => (dispatch, getState) => {
+  console.log(name, feedUrl)
+  let user_id = localStorage.getItem('user_id')
+  let token = localStorage.getItem('token')
+  fetch('http://localhost:4000/subscriptions', {
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({feedUrl: feedUrl, name: name})
+    })
+    .then(res => res.json()).then( (subscription) => {
+      console.log(subscription)
+      dispatch({
+        type: ADD_SUBSCRIPTION,
+        subscription
+      })
+    });
+};

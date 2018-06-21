@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
 import {Menu, Input} from 'semantic-ui-react'
 import Home from './Containers/Home';
 import FeedUI from './Containers/FeedUI';
+import {logout} from './actions/loginActions'
 
 class App extends Component {
   loggedIn = () => {
     return localStorage.getItem('token') !== null
   }
-  logout = (event) => {
+  logout = () => {
+    this.props.logout()
     localStorage.clear()
     this.forceUpdate()
   }
@@ -58,5 +61,7 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+export default connect(mapStateToProps, {logout}) (App);

@@ -1,15 +1,17 @@
-import { ARTICLE_FOCUS, MODAL_TOGGLE, SET_ACTIVE_ITEM, SET_SUBSCRIPTION_FOCUS, NEW_SUBSCRIPTION } from '../actions/types';
+import { ON_FORM_CHANGE, ARTICLE_FOCUS, MODAL_TOGGLE, SET_ACTIVE_ITEM, SET_SUBSCRIPTION_FOCUS, NEW_SUBSCRIPTION } from '../actions/types';
 
 const initialState = {
   activeView: {},
   activeItem: {},
   activeSubscription: false,
   activeArticle: false,
-  modalStatus: false
+  modalStatus: false,
+  addSubscriptionFeedName: '',
+  addSubscriptionUrl: ''
 };
 
 export default function(state = initialState, action) {
-  console.log(action)
+
   switch (action.type) {
     case SET_ACTIVE_ITEM:
       return {
@@ -17,7 +19,6 @@ export default function(state = initialState, action) {
         ...action.payload
       };
     case NEW_SUBSCRIPTION:
-      console.log(state)
       return {
         ...state,
         newSubscription: action.payload
@@ -37,6 +38,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activeArticle: action.article
+      }
+    case ON_FORM_CHANGE:
+      console.log(action)
+      return {
+        ...state,
+        ...action.payload
       }
     default:
       return state;
