@@ -21,7 +21,9 @@ const ReadModal = ({categories,content,contentSnippet,creator,encodedContent,gui
     <Modal.Header>{title}</Modal.Header>
     <Modal.Content>
       <Modal.Description>
-        {encodedContent ? Parser(encodedContent) : content}
+        {link ? <a href={link}>{title}</a> : null}
+        <br/>
+        {encodedContent ? Parser(encodedContent) : content ? Parser(content) : contentSnippet}
       </Modal.Description>
     </Modal.Content>
   </Modal>

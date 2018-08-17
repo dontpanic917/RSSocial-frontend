@@ -34,7 +34,7 @@ class Article extends Component {
         guid={guid}
         header={title}
         style={{cursor:'pointer', padding: ''}}
-        description={Parser(content)}
+        description={Parser(contentSnippet).slice(0,500)+ '...'}
         onClick={() => openArticle(subscription,guid)}
         onMouseOver={this.handleOnMouseOver}
         onMouseLeave={this.handleonMouseLeave}

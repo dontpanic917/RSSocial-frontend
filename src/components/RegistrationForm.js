@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Form, Checkbox, Button} from 'semantic-ui-react'
-export default class RegistrationForm extends Component {
+import { withRouter } from 'react-router-dom'
 
+class RegistrationForm extends Component {
   state = {
     name: "",
     username: "",
@@ -38,6 +39,7 @@ export default class RegistrationForm extends Component {
         localStorage.setItem('user_id', json.user_id)
         localStorage.setItem('username', json.username)
         // this.props.refresh()
+        this.props.history.push('/feeds')
       } else{
         this.setState({errors: "Mistake"})
       }
@@ -133,3 +135,4 @@ export default class RegistrationForm extends Component {
     </div>)
   }
 }
+export default withRouter(RegistrationForm)
